@@ -24,11 +24,11 @@ def ratingCheck(media_type, items_to_rate, watched_time, total_time):
         logger.debug("Summary information is empty, aborting.")
         return
     watched = (watched_time / total_time) * 100
-    if watched >= kodiUtilities.getSettingAsFloat("rate_min_view_time"):
+    if watched >= kodiUtilities.getSettingAsFloat("scrobble_stop_min_view_time"):
         rateMedia(media_type, items_to_rate)
     else:
         logger.debug("'%s' does not meet minimum view time for rating (watched: %0.2f%%, minimum: %0.2f%%)" % (
-            media_type, watched, kodiUtilities.getSettingAsFloat("rate_min_view_time")))
+            media_type, watched, kodiUtilities.getSettingAsFloat("scrobble_stop_min_view_time")))
 
 
 def rateMedia(media_type, itemsToRate, unrate=False, rating=None):

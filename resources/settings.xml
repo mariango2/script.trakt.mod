@@ -599,7 +599,7 @@
 					<default>true</default>
 					<level>1</level>
 				</setting>
-				<setting id="rate_min_view_time" type="integer" label="32008" help="">
+				<setting id="scrobble_stop_min_view_time" type="integer" label="32008" help="">
 					<constraints>
 						<minimum>0</minimum>
 						<step>5</step>
@@ -608,7 +608,7 @@
 					<control type="slider" format="integer">
 						<popup>false</popup>
 					</control>
-					<default>75</default>
+					<default>90</default>
 					<level>1</level>
 				</setting>
 				<setting id="rate_rerate" type="boolean" label="32009" help="">
