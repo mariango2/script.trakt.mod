@@ -225,6 +225,12 @@ class traktAPI(object):
             with Trakt.configuration.http(retry=True, timeout=90):
                 Trakt['sync/ratings'].movies(store=movies, exceptions=True)
         return movies
+    
+    def getMoviesWatchlist(self, movies):
+        with Trakt.configuration.oauth.from_response(self.authorization):
+            with Trakt.configuration.http(retry=True):
+                Trakt['sync/watchlist'].movies(store=movies, exceptions=True)
+        return movies
 
     def addToCollection(self, mediaObject):
         with Trakt.configuration.oauth.from_response(self.authorization):
