@@ -47,8 +47,8 @@ msgid "Rate TV show Episode after watching"
 msgstr "Bewertung nach Serienepisode abgeben"
 
 msgctxt "#32008"
-msgid "Minimum percent watched to display rating dialog"
-msgstr "Mindestprozentzahl gesehen, um Bewertungsdialog anzuzeigen"
+msgid "Minimum percent watched to mark as watched"
+msgstr "Mindestprozentzahl gesehen, um als Angesehen zu markieren"
 
 msgctxt "#32009"
 msgid "Allow re-rating of media"
