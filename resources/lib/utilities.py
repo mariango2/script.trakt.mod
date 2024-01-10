@@ -307,8 +307,9 @@ def sanitizeShows(shows):
                     del episode['ids']['episodeid']
 
 
-def compareMovies(movies_col1, movies_col2, matchByTitleAndYear, watched=False, restrict=False, playback=False, rating=False):
+def compareMovies(movies_col1, movies_col2, matchByTitleAndYear, watched=False, restrict=False, playback=False, rating=False, watchlist=None):
     movies = []
+    logger.debug("watchlist: %s" % watchlist)
     for movie_col1 in movies_col1:
         if movie_col1:
             movie_col2 = findMediaObject(
@@ -318,6 +319,8 @@ def compareMovies(movies_col1, movies_col2, matchByTitleAndYear, watched=False, 
 
             if movie_col2:  # match found
                 if watched:  # are we looking for watched items
+                    if watchlist and 'imdb' in movie_col1['ids'] and movie_col1['ids']['imdb'] in watchlist:
+                        movie_col1['plays'] = 0
                     if movie_col2['watched'] == 0 and movie_col1['watched'] == 1:
                         if 'movieid' not in movie_col1:
                             movie_col1['movieid'] = movie_col2['movieid']
