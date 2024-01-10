@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/trakt/script.trakt.svg?branch=main)](https://travis-ci.org/trakt/script.trakt)
-[![Coverage Status](https://coveralls.io/repos/github/trakt/script.trakt/badge.svg)](https://coveralls.io/github/trakt/script.trakt)
+[![Build Status](https://travis-ci.org/trakt/script.trakt.mod.svg?branch=main)](https://travis-ci.org/trakt/script.trakt.mod)
+[![Coverage Status](https://coveralls.io/repos/github/trakt/script.trakt.mod/badge.svg)](https://coveralls.io/github/trakt/script.trakt.mod)
 
 # Trakt.tv scrobbler and library sync
 
@@ -54,7 +54,7 @@ Remote streaming content will scrobble assuming the metadata is correctly set in
 If your not a developer, you should only install this from the official Kodi repo via Kodi itself. If you are a dev, here is how you install the dev version:
 
 1. Download the zip ([download it here](../../zipball/main))
-2. Install script.trakt by zip. Go to _Settings_ > _Add-ons_ > _Install from zip file_ > Choose the just downloaded zip
+2. Install script.trakt.mod by zip. Go to _Settings_ > _Add-ons_ > _Install from zip file_ > Choose the just downloaded zip
 3. Navigate to _Settings_ > _Add-ons_ > _Enabled add-ons_ > _Services_ > **Trakt**
 4. Select _Trakt_ and go to **Configure**
 5. Get your **PIN** [here](http://www.trakt.tv/pin/999) and enter it, change any other settings as needed
@@ -63,7 +63,7 @@ If your not a developer, you should only install this from the official Kodi rep
 
 or
 
-1. Clone this repository (or [download it here](../../zipball/main)) into a folder called **script.trakt** inside your Kodi **addons** folder
+1. Clone this repository (or [download it here](../../zipball/main)) into a folder called **script.trakt.mod** inside your Kodi **addons** folder
 2. Start Kodi (or restart if its already running)
 3. Make sure you have the modules Trakt and dateutil installed. Check under _Settings_ > _Add-ons_ > _Get Add-ons_ > _All Add-ons_ > _Add-on libraries_ (restart if you had to install these)
 4. Navigate to _Settings_ > _Add-ons_ > _Enabled add-ons_ > _Services_ > **Trakt**
@@ -72,7 +72,7 @@ or
 7. Select **OK** to save your settings
 8. Watch _something_ and see it show up on Trakt.tv!
 
-Please note that _something_ does not cover all Kodi possible streaming sources. Local files and strm files scrapped to your library should be OK, however generic third party streaming addons can fail. It is up to the developers of these addons to be supported by this plugin. Please take a look https://github.com/trakt/script.trakt/wiki/Providing-id's-to-facilitate-scrobbling
+Please note that _something_ does not cover all Kodi possible streaming sources. Local files and strm files scrapped to your library should be OK, however generic third party streaming addons can fail. It is up to the developers of these addons to be supported by this plugin. Please take a look https://github.com/trakt/script.trakt.mod/wiki/Providing-id's-to-facilitate-scrobbling
 
 ### Problems?
 
@@ -83,7 +83,7 @@ Please note that _something_ does not cover all Kodi possible streaming sources.
 
 #### Creating logfiles
 
-- To create a logfile, enable the debug setting in Kodi AND script.trakt, otherwise the logfile won't show any data from script.trakt. Check the [Kodi documentation](http://kodi.wiki/view/Log_file) if you don't know where your logfile can be found.
+- To create a logfile, enable the debug setting in Kodi AND script.trakt.mod, otherwise the logfile won't show any data from script.trakt.mod. Check the [Kodi documentation](http://kodi.wiki/view/Log_file) if you don't know where your logfile can be found.
 
 #### Invoke sync via jsonrpc
 
@@ -95,12 +95,12 @@ Save this as `kodi-trakt-update.sh`
 # url to kodi jsonrpc
 url=http://localhost:8080/jsonrpc
 
-# https://github.com/trakt/script.trakt/issues/192#issuecomment-70359374
+# https://github.com/trakt/script.trakt.mod/issues/192#issuecomment-70359374
 request='{
         "jsonrpc":"2.0",
         "method":"Addons.ExecuteAddon",
         "params":{
-                "addonid":"script.trakt",
+                "addonid":"script.trakt.mod",
                 "params":{
                         "action":"sync",
                         "silent":"False"

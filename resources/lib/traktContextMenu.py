@@ -5,7 +5,7 @@ import xbmcgui
 from resources.lib.utilities import isMovie, isShow, isSeason, isEpisode
 from resources.lib.kodiUtilities import getString
 
-__addon__ = xbmcaddon.Addon("script.trakt")
+__addon__ = xbmcaddon.Addon("script.trakt.mod")
 
 ACTION_LIST = 111
 DIALOG_IMAGE = 2

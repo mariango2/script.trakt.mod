@@ -11,7 +11,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-__addon__ = xbmcaddon.Addon("script.trakt")
+__addon__ = xbmcaddon.Addon("script.trakt.mod")
 
 
 def ratingCheck(media_type, items_to_rate, watched_time, total_time):

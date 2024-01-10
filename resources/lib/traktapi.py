@@ -18,7 +18,7 @@ from trakt import Trakt
 from trakt.objects import Movie, Show
 
 # read settings
-__addon__ = xbmcaddon.Addon('script.trakt')
+__addon__ = xbmcaddon.Addon('script.trakt.mod')
 __addonversion__ = __addon__.getAddonInfo('version')
 
 logger = logging.getLogger(__name__)

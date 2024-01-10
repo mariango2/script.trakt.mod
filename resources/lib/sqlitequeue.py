@@ -18,7 +18,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-__addon__ = xbmcaddon.Addon('script.trakt')
+__addon__ = xbmcaddon.Addon('script.trakt.mod')
 
 # code from http://flask.pocoo.org/snippets/88/ with some modifications
 class SqliteQueue(object):

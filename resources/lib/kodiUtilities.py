@@ -12,7 +12,7 @@ from resources.lib import utilities
 
 
 # read settings
-__addon__ = xbmcaddon.Addon('script.trakt')
+__addon__ = xbmcaddon.Addon('script.trakt.mod')
 
 logger = logging.getLogger(__name__)
 
@@ -99,7 +99,7 @@ def checkExclusion(fullpath: str) -> bool:
         return True
 
     # Script exclusion
-    if xbmcgui.Window(10000).getProperty('script.trakt.paused') == 'true' and getSettingAsBool('ExcludeScript'):
+    if xbmcgui.Window(10000).getProperty('script.trakt.mod.paused') == 'true' and getSettingAsBool('ExcludeScript'):
         logger.debug(
             "checkExclusion(): Video is playing via Script source, which is currently set as excluded location.")
         return True
@@ -417,7 +417,7 @@ def getInfoLabelDetails(result):
         title = xbmc.getInfoLabel('VideoPlayer.EpisodeName')
         year = (xbmc.getInfoLabel('VideoPlayer.Year')
                 or utilities.regex_year(showtitle)[1])
-        video_ids = xbmcgui.Window(10000).getProperty('script.trakt.ids')
+        video_ids = xbmcgui.Window(10000).getProperty('script.trakt.mod.ids')
         if video_ids:
             data['video_ids'] = json.loads(video_ids)
         logger.debug("getInfoLabelDetails info - ids: %s, showtitle: %s, Year: %s, Season: %s, Episode: %s" %
