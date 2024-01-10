@@ -485,6 +485,18 @@
 					<default>false</default>
 					<level>1</level>
 				</setting>
+				<setting id="scrobble_stop_min_view_time" type="integer" label="32008" help="">
+					<constraints>
+						<minimum>0</minimum>
+						<step>5</step>
+						<maximum>100</maximum>
+					</constraints>
+					<control type="slider" format="integer">
+						<popup>false</popup>
+					</control>
+					<default>90</default>
+					<level>1</level>
+				</setting>
 				<setting id="scrobble_fallback" type="boolean" label="32164" help="">
 					<control type="toggle" />
 					<default>true</default>
@@ -597,18 +609,6 @@
 				<setting id="rate_episode" type="boolean" label="32006" help="">
 					<control type="toggle" />
 					<default>true</default>
-					<level>1</level>
-				</setting>
-				<setting id="rate_min_view_time" type="integer" label="32008" help="">
-					<constraints>
-						<minimum>0</minimum>
-						<step>5</step>
-						<maximum>100</maximum>
-					</constraints>
-					<control type="slider" format="integer">
-						<popup>false</popup>
-					</control>
-					<default>75</default>
 					<level>1</level>
 				</setting>
 				<setting id="rate_rerate" type="boolean" label="32009" help="">

@@ -49,7 +49,7 @@ msgid "Rate TV show Episode after watching"
 msgstr ""
 
 msgctxt "#32008"
-msgid "Minimum percent watched to display rating dialog"
+msgid "Minimum percent watched to mark as watched"
 msgstr ""
 
 msgctxt "#32009"
