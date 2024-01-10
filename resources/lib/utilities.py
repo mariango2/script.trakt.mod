@@ -307,8 +307,9 @@ def sanitizeShows(shows):
                     del episode['ids']['episodeid']
 
 
-def compareMovies(movies_col1, movies_col2, matchByTitleAndYear, watched=False, restrict=False, playback=False, rating=False):
+def compareMovies(movies_col1, movies_col2, matchByTitleAndYear, watched=False, restrict=False, playback=False, rating=False, watchlist=None):
     movies = []
+    logger.debug("watchlist: %s" % watchlist)
     for movie_col1 in movies_col1:
         if movie_col1:
             movie_col2 = findMediaObject(
@@ -318,6 +319,8 @@ def compareMovies(movies_col1, movies_col2, matchByTitleAndYear, watched=False, 
 
             if movie_col2:  # match found
                 if watched:  # are we looking for watched items
+                    if watchlist and 'imdb' in movie_col1['ids'] and movie_col1['ids']['imdb'] in watchlist:
+                        movie_col1['plays'] = 0
                     if movie_col2['watched'] == 0 and movie_col1['watched'] == 1:
                         if 'movieid' not in movie_col1:
                             movie_col1['movieid'] = movie_col2['movieid']
@@ -397,6 +400,10 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
     # logger.debug("epi shows_col2 %s" % shows_col2)
     for show_col1 in shows_col1['shows']:
         if show_col1:
+            if 'reset_at' in show_col1:
+                reset_at = show_col1['reset_at']
+            else:
+                reset_at = None
             show_col2 = findMediaObject(
                 show_col1, shows_col2['shows'], matchByTitleAndYear)
             # logger.debug("show_col1 %s" % show_col1)
@@ -484,7 +491,10 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                     for seasonKey in season_diff:
                         episodes = []
                         for episodeKey in season_diff[seasonKey]:
-                            episodes.append(season_diff[seasonKey][episodeKey])
+                            epi_temp = season_diff[seasonKey][episodeKey]
+                            if reset_at and reset_at > convertUtcToDateTime(epi_temp['last_watched_at']):
+                                epi_temp['plays'] = 0
+                            episodes.append(epi_temp)
                         show['seasons'].append(
                             {'number': seasonKey, 'episodes': episodes})
                     if 'tvshowid' in show_col2:

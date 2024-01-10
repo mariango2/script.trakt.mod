@@ -33,6 +33,15 @@ class SyncMovies():
             if sync.show_progress and not sync.run_silent:
                 progress.close()
             return
+        
+        try:
+            traktMoviesWatchlist = self.__traktLoadMoviesWatchlist()
+        except Exception:
+            logger.debug(
+                "[Movies Sync] Error getting Trakt.tv movie watchlist, aborting movie Sync.")
+            if sync.show_progress and not sync.run_silent:
+                progress.close()
+            return
 
         traktMoviesProgress = self.__traktLoadMoviesPlaybackProgress(25, 36)
 
@@ -42,7 +51,7 @@ class SyncMovies():
 
         self.__addMoviesToTraktWatched(kodiMovies, traktMovies, 59, 69)
 
-        self.__addMoviesToKodiWatched(traktMovies, kodiMovies, 70, 80)
+        self.__addMoviesToKodiWatched(traktMovies, kodiMovies, 70, 80, traktMoviesWatchlist)
 
         self.__addMovieProgressToKodi(traktMoviesProgress, kodiMovies, 81, 91)
 
@@ -102,6 +111,20 @@ class SyncMovies():
             movies.append(movie)
 
         return movies
+    
+    def __traktLoadMoviesWatchlist(self):
+        logger.debug("[Movies Sync] Getting movie watchlist from Trakt.tv")
+
+        traktMoviesWatchlist = {}
+        traktMoviesWatchlist = self.sync.traktapi.getMoviesWatchlist(traktMoviesWatchlist)
+
+        traktMoviesWatchlist = list(traktMoviesWatchlist.items())
+
+        moviesWatchlist = []
+        for (_, id), _ in traktMoviesWatchlist:
+            moviesWatchlist.append(id)
+
+        return moviesWatchlist
 
     def __traktLoadMoviesPlaybackProgress(self, fromPercent, toPercent):
         if kodiUtilities.getSettingAsBool('trakt_movie_playback') and not self.sync.IsCanceled():
@@ -265,14 +288,15 @@ class SyncMovies():
             self.sync.UpdateProgress(toPercent, line2=kodiUtilities.getString(
                 32087) % len(traktMoviesToUpdate))
 
-    def __addMoviesToKodiWatched(self, traktMovies, kodiMovies, fromPercent, toPercent):
+    def __addMoviesToKodiWatched(self, traktMovies, kodiMovies, fromPercent, toPercent, traktWatchlist):
 
         if kodiUtilities.getSettingAsBool('kodi_movie_playcount') and not self.sync.IsCanceled():
             updateKodiTraktMovies = copy.deepcopy(traktMovies)
             updateKodiKodiMovies = copy.deepcopy(kodiMovies)
+            updateTraktWatchlist = copy.deepcopy(traktWatchlist)
 
             kodiMoviesToUpdate = utilities.compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, kodiUtilities.getSettingAsBool(
-                "scrobble_fallback"), watched=True, restrict=True)
+                "scrobble_fallback"), watched=True, restrict=True, watchlist=updateTraktWatchlist)
 
             if len(kodiMoviesToUpdate) == 0:
                 self.sync.UpdateProgress(
