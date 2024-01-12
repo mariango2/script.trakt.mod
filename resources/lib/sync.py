@@ -79,6 +79,9 @@ class Sync():
 
         logger.debug("[Sync] Finished synchronization with Trakt.tv")
 
+        if self.__syncCheck('movies') | self.__syncCheck('episodes'):
+            xbmc.executebuiltin('ReloadSkin()')
+
     def IsCanceled(self):
         if self.show_progress and not self.run_silent and progress.iscanceled():
             logger.debug("Sync was canceled by user.")
