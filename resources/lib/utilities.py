@@ -492,7 +492,7 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                         episodes = []
                         for episodeKey in season_diff[seasonKey]:
                             epi_temp = season_diff[seasonKey][episodeKey]
-                            if reset_at and reset_at > convertUtcToDateTime(epi_temp['last_watched_at']):
+                            if reset_at and reset_at > epi_temp['last_watched_at']:
                                 epi_temp['plays'] = 0
                             episodes.append(epi_temp)
                         show['seasons'].append(
