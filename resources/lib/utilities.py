@@ -331,7 +331,7 @@ def compareMovies(movies_col1, movies_col2, matchByTitleAndYear, watched=False, 
                     movie_col1['runtime'] = movie_col2['runtime']
                     movies.append(movie_col1)
                 elif rating:
-                    if 'rating' in movie_col1 and movie_col1['rating'] != 0 and ('rating' not in movie_col2 or movie_col2['rating'] == 0):
+                    if 'rating' in movie_col1 and movie_col1['rating'] != 0 and ('rating' not in movie_col2 or movie_col2['rating'] != movie_col1['rating']):
                         if 'movieid' not in movie_col1:
                             movie_col1['movieid'] = movie_col2['movieid']
                         movies.append(movie_col1)
