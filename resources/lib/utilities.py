@@ -371,7 +371,7 @@ def compareShows(shows_col1, shows_col2, matchByTitleAndYear, rating=False, rest
                 if 'tvshowid' in show_col2:
                     show['tvshowid'] = show_col2['tvshowid']
 
-                if rating and 'rating' in show_col1 and show_col1['rating'] != 0 and ('rating' not in show_col2 or show_col2['rating'] == 0):
+                if rating and 'rating' in show_col1 and show_col1['rating'] != 0 and ('rating' not in show_col2 or show_col2['rating'] != show_col1['rating']):
                     show['rating'] = show_col1['rating']
                     shows.append(show)
                 elif not rating:
