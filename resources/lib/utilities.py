@@ -438,7 +438,7 @@ def compareEpisodes(shows_col1, shows_col2, matchByTitleAndYear, watched=False, 
                             if len(t) > 0:
                                 eps = {}
                                 for ep in t:
-                                    if 'rating' in a[ep] and a[ep]['rating'] != 0 and season_col2[season][ep]['rating'] == 0:
+                                    if 'rating' in a[ep] and a[ep]['rating'] != 0 and season_col2[season][ep]['rating'] != a[ep]['rating']:
                                         eps[ep] = a[ep]
                                         if 'episodeid' in season_col2[season][ep]['ids']:
                                             if 'ids' in eps:
