@@ -525,22 +525,6 @@ class SyncEpisodes:
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
 
-            traktShowsToUpdate = utilities.compareShows(
-                updateKodiKodiShows, updateKodiTraktShows, kodiUtilities.getSettingAsBool("scrobble_fallback"), rating=True)
-            if len(traktShowsToUpdate['shows']) == 0:
-                self.sync.UpdateProgress(
-                    toPercent, line1='', line2=kodiUtilities.getString(32181))
-                logger.debug(
-                    "[Episodes Sync] Trakt show ratings are up to date.")
-            else:
-                logger.debug("[Episodes Sync] %i show(s) will have show ratings added on Trakt" % len(
-                    traktShowsToUpdate['shows']))
-
-                self.sync.UpdateProgress(fromPercent, line1='', line2=kodiUtilities.getString(
-                    32182) % len(traktShowsToUpdate['shows']))
-
-                self.sync.traktapi.addRating(traktShowsToUpdate)
-
             # needs to be restricted, because we can't add a rating to an episode which is not in our Kodi collection
             kodiShowsUpdate = utilities.compareShows(updateKodiTraktShows, updateKodiKodiShows, kodiUtilities.getSettingAsBool(
                 "scrobble_fallback"), rating=True, restrict=True)
@@ -584,21 +568,6 @@ class SyncEpisodes:
         if kodiUtilities.getSettingAsBool('trakt_sync_ratings') and traktShows and not self.sync.IsCanceled():
             updateKodiTraktShows = copy.deepcopy(traktShows)
             updateKodiKodiShows = copy.deepcopy(kodiShows)
-
-            traktShowsToUpdate = utilities.compareEpisodes(
-                updateKodiKodiShows, updateKodiTraktShows, kodiUtilities.getSettingAsBool("scrobble_fallback"), rating=True)
-            if len(traktShowsToUpdate['shows']) == 0:
-                self.sync.UpdateProgress(
-                    toPercent, line1='', line2=kodiUtilities.getString(32181))
-                logger.debug(
-                    "[Episodes Sync] Trakt episode ratings are up to date.")
-            else:
-                logger.debug("[Episodes Sync] %i show(s) will have episode ratings added on Trakt" % len(
-                    traktShowsToUpdate['shows']))
-
-                self.sync.UpdateProgress(fromPercent, line1='', line2=kodiUtilities.getString(
-                    32182) % len(traktShowsToUpdate['shows']))
-                self.sync.traktapi.addRating(traktShowsToUpdate)
 
             kodiShowsUpdate = utilities.compareEpisodes(updateKodiTraktShows, updateKodiKodiShows, kodiUtilities.getSettingAsBool(
                 "scrobble_fallback"), restrict=True, rating=True)

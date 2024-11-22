@@ -384,24 +384,6 @@ class SyncMovies():
             updateKodiTraktMovies = copy.deepcopy(traktMovies)
             updateKodiKodiMovies = copy.deepcopy(kodiMovies)
 
-            traktMoviesToUpdate = utilities.compareMovies(
-                updateKodiKodiMovies, updateKodiTraktMovies, kodiUtilities.getSettingAsBool("scrobble_fallback"), rating=True)
-            if len(traktMoviesToUpdate) == 0:
-                self.sync.UpdateProgress(
-                    toPercent, line1='', line2=kodiUtilities.getString(32179))
-                logger.debug(
-                    "[Movies Sync] Trakt movie ratings are up to date.")
-            else:
-                logger.debug("[Movies Sync] %i movie(s) ratings will be updated on Trakt" % len(
-                    traktMoviesToUpdate))
-
-                self.sync.UpdateProgress(fromPercent, line1='', line2=kodiUtilities.getString(
-                    32180) % len(traktMoviesToUpdate))
-
-                moviesRatings = {'movies': traktMoviesToUpdate}
-
-                self.sync.traktapi.addRating(moviesRatings)
-
             kodiMoviesToUpdate = utilities.compareMovies(updateKodiTraktMovies, updateKodiKodiMovies, kodiUtilities.getSettingAsBool(
                 "scrobble_fallback"), restrict=True, rating=True)
             if len(kodiMoviesToUpdate) == 0:
